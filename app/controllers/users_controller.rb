@@ -11,6 +11,8 @@ class UsersController < ApplicationController
     @books = @user.books
     @userinfo = User.find(params[:id])
     @booknew = Book.new
+    @today = @books.where(created_at: Time.zone.now.all_day).count
+    
   end
 
   def edit

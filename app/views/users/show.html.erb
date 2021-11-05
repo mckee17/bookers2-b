@@ -35,6 +35,51 @@
           </tbody>
         </table>
 
+      <h2>投稿数の前日比・前週比</h2>
+      <table class="table my-2">
+        <thead>
+          <tr>
+            <th>今日の投稿数</th>
+            <th>前日の投稿数</th>
+            <th>前日比</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @books.where(created_at: Time.zone.now.all_day).count %></td>
+            <td><%= @books.where(created_at: Time.zone.yesterday.all_day).count %></td>
+            <% if @books.where(created_at: Time.zone.yesterday.all_day).count == 0 %>
+            <td><%= nil %></td>
+            <% else %>
+            <td><%= @books.where(created_at: Time.zone.now.all_day).count / @books.where(created_at: Time.zone.yesterday.all_day).count %>
+                </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>今週の投稿数</th>
+            <th>前週の投稿数</th>
+            <th>前週比</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @books.where(created_at: Time.current.all_week).count %></td>
+            <td><%= @books.where(created_at: Time.current.last_week.all_week).count %></td>
+            <% if @books.where(created_at: Time.current.last_week.all_week).count == 0 %>
+            <td><%= nil %></td>
+            <% else %>
+            <td><%= @books.where(created_at: Time.current.all_week).count / @books.where(created_at: Time.current.last_week.all_week).count %>
+                </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
 
   </div>
