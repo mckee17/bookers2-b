@@ -1,18 +1,18 @@
 class UsersController < ApplicationController
-  
+
   def index
     @users = User.all
     @userinfo = current_user
     @booknew = Book.new
   end
-  
+
   def show
     @user = User.find(params[:id])
     @books = @user.books
     @userinfo = User.find(params[:id])
     @booknew = Book.new
-    @today = @books.where(created_at: Time.zone.now.all_day).count
-    
+
+
   end
 
   def edit
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user.id)
     end
   end
-  
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -30,7 +30,6 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-
 
  private
 
