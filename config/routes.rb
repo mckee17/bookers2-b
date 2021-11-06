@@ -10,9 +10,6 @@ Rails.application.routes.draw do
   end
 
   resources :users, only:[:index,:show,:edit,:update] do
-    member do
-      post :search
-    end
     resource :relationships, only:[:create,:destroy] do
       collection do
         get :follow
